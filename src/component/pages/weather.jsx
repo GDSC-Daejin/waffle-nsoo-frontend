@@ -87,6 +87,7 @@ export default function Weather({ selectedLocation }) {
         const Main = data.weather[0].main;
         const WeatherIcon = data.weather[0].icon;
         const Key = data.weather[0].id;
+        const Humidity = data.main.humidity;
 
         return (
           <WeatherContainer backgroundColor={backgroundColor} key={Key}>
@@ -94,6 +95,7 @@ export default function Weather({ selectedLocation }) {
             <WeatherBox>
               <p>오늘의 온도: {Today.toFixed(1)}°C</p>
               <p>오늘의 날씨: {Main}</p>
+              습도: {Humidity}%
               <img
                 src={`http://openweathermap.org/img/wn/${WeatherIcon}@2x.png`}
                 width={150}
