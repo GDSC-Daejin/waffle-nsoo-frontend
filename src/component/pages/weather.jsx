@@ -1,20 +1,7 @@
-import React, { startTransition, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import sunnyIcon from "../assets/icons/01d.png";
-import moonIcon from "../assets/icons/02n.png";
-import shallowCloudIcon from "../assets/icons/02d.png";
-import thickCloudIcon from "../assets/icons/03d.png";
-import nightCloudIcon from "../assets/icons/03n.png";
-import cloudIcon from "../assets/icons/04d.png";
-import rainyIcon from "../assets/icons/09d.png";
-import rainIcon from "../assets/icons/10d.png";
-import thunderstormIcon from "../assets/icons/11d.png";
-import snowIcon from "../assets/icons/13d.png";
-import windyIcon from "../assets/icons/50d.png";
-import nightCloudIcon2 from "../assets/icons/04n.png";
-import nightShallowCloudIcon from "../assets/icons/04n.png";
 import weather from "../assets/images/weather.jpeg";
 import samsung from "../assets/images/samsung.jpg";
 import kt from "../assets/images/kt.jpg";
@@ -56,6 +43,7 @@ const WeatherContainer = styled.div`
 
 const WeatherBox = styled.div`
   width: 300px;
+  height: 320px;
   border: 2px solid black;
   display: flex;
   flex-direction: column;
@@ -154,193 +142,41 @@ const Weather = () => {
     });
   };
 
-  const getWeatherIcon = (weatherCode) => {
-    switch (weatherCode) {
-      case "01d":
-        return (
-          <img
-            src={sunnyIcon}
-            alt="맑은 하늘"
-            width="80"
-            height="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "01n":
-        return (
-          <img
-            src={moonIcon}
-            alt="밤 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "02d":
-        return (
-          <img
-            src={shallowCloudIcon}
-            alt="옅은 구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "02n":
-        return (
-          <img
-            src={nightShallowCloudIcon}
-            alt="옅은 구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "03d":
-        return (
-          <img
-            src={thickCloudIcon}
-            alt="짙은 구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "03n":
-        return (
-          <img
-            src={nightCloudIcon}
-            alt="밤 구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "04d":
-        return (
-          <img
-            src={cloudIcon}
-            alt="구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "04n":
-        return (
-          <img
-            src={nightCloudIcon2}
-            alt="구름 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "09d":
-        return (
-          <img
-            src={rainyIcon}
-            alt="비 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "09n":
-        return (
-          <img
-            src={rainyIcon}
-            alt="밤 비 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "10d":
-        return (
-          <img
-            src={rainIcon}
-            alt="비가 많이 오는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "11d":
-        return (
-          <img
-            src={thunderstormIcon}
-            alt="번개치는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "11n":
-        return (
-          <img
-            src={thunderstormIcon}
-            alt="밤에 번개치는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "13d":
-        return (
-          <img
-            src={snowIcon}
-            alt="눈오는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "13n":
-        return (
-          <img
-            src={snowIcon}
-            alt="눈오는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "50d":
-        return (
-          <img
-            src={windyIcon}
-            alt="바람이 부는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      case "50n":
-        return (
-          <img
-            src={windyIcon}
-            alt="저녁에 바람이 부는 사진"
-            width="80"
-            style={{ filter: "invert(1)" }}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
-    <WeatherContainer>
-      <Title>현재 야구장날씨</Title>
-      {weatherData.map((data, index) => (
-        <WeatherBox
-          key={index}
-          style={{ display: currentIndex === index ? "flex" : "none" }}
-          backgroundImage={cityList[index].backgroundImage}
-        >
-          <CityListItem
-            name={cityList[index].name}
-            backgroundColor={cityList[index].backgroundColor}
-          >
-            {cityList[index].name}
-          </CityListItem>
-          <CurrentWeather>
-            오늘의 날씨 : {getWeatherIcon(data.weather[0].icon.slice(0, 3))}
-            <p>온도: {(data.main.temp - 273.15).toFixed(2)}°C</p>
-          </CurrentWeather>
-        </WeatherBox>
-      ))}
-      <BtnsContainer>
-        <Btns onClick={() => buttonHandler(-1)}> {"<"}</Btns>
-        <Btns onClick={() => buttonHandler(1)}> {">"}</Btns>
-      </BtnsContainer>
-    </WeatherContainer>
+    <>
+      <WeatherContainer>
+        <Title>현재 야구장날씨</Title>
+        {weatherData.map((data, index) => {
+          const Icon = data.weather[0].icon; // Icon 변수 초기화
+          return (
+            <WeatherBox
+              key={index}
+              style={{ display: currentIndex === index ? "flex" : "none" }}
+              backgroundImage={cityList[index].backgroundImage}
+            >
+              <CityListItem
+                name={cityList[index].name}
+                backgroundColor={cityList[index].backgroundColor}
+              >
+                {cityList[index].name}
+              </CityListItem>
+              <CurrentWeather>
+                오늘의 날씨 :
+                <img
+                  src={`http://openweathermap.org/img/wn/${Icon}@2x.png`}
+                  width={100}
+                />
+                <p>온도: {(data.main.temp - 273.15).toFixed(1)}°C</p>
+              </CurrentWeather>
+            </WeatherBox>
+          );
+        })}
+        <BtnsContainer>
+          <Btns onClick={() => buttonHandler(-1)}> {"<"}</Btns>
+          <Btns onClick={() => buttonHandler(1)}> {">"}</Btns>
+        </BtnsContainer>
+      </WeatherContainer>
+    </>
   );
 };
 
