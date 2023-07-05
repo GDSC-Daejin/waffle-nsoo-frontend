@@ -31,6 +31,8 @@ const Title = styled.h1`
   margin-left: auto;
   margin-right: auto;
   font-size: 50px;
+  width: 100%;
+  justify-content: center;
   border-bottom: 1px solid;
   @media (max-width: 868px) {
     left: 0;
