@@ -3,16 +3,18 @@
 
 # Start
 ```
+1. node js만 설치되어있고 yarn은 설치되어있지 않을때
   npm install yarn
-  
-  yarn install
+2. yarn이 설치되어있을때
+  yarn install 
   yarn add styled-components
   yarn add axios
+  yarn add react-router-dom
+  yarn add styled-reset
 
   yarn start
 ```
 # 만약 위 코드 다 써도 오류가 나면
 ```
-  yarn add react-router-dom
-  yarn add styled-reset
+  
 ```
