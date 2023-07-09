@@ -28,8 +28,8 @@ const cityList = [
     name: "Gwangju",
     backgroundColor: "#D52E35",
     id: "125",
-    top: "460px",
-    left: "100px",
+    top: "470px",
+    left: "110px",
     backgroundImage: "Gwangju",
   },
   {
