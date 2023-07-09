@@ -1,12 +1,3 @@
-import Seoul from "../images/seoul.jpg";
-import Daegu from "../images/samsung.jpg";
-import Gwangju from "../images/kia.png";
-import Daejeon from "../images/hanhwa.jpg";
-import Changwon from "../images/nc.jpg";
-import Busan from "../images/lotte.jpg";
-import Suwon from "../images/kt.jpg";
-import Incheon from "../images/ssg.jpg";
-
 const cityList = [
   {
     name: "Seoul",
