@@ -1,10 +1,15 @@
 import React from "react";
 import Weather from "./component/pages/weather";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <>
-      <Weather></Weather>
+      <QueryClientProvider client={queryClient}>
+        <Weather></Weather>
+      </QueryClientProvider>
     </>
   );
 }
