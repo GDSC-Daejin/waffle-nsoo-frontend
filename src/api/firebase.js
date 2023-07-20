@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import  { getFirestore } from 'firebase/firestore';
 
 
 const firebaseConfig = { // process.env.REACT_APP ~~~
@@ -32,5 +33,5 @@ export async function logout() {
 }
 
 export const auth = getAuth(app);
-
+export const db = getFirestore(app);
 

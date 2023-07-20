@@ -1,29 +1,38 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { db } from '../api/firebase';
+import {collection, addDoc } from 'firebase/firestore';
+
 
 export default function App() {
+
+    const [ name, setName ] = useState("");
+    const [ phoneNum, setPhoneNum ] = useState("");
+    const [ local, setLocal ] = useState("");
+
+    const usersCollectionRef = collection(db, "users");
+
+    const createUser = async () => {
+        await addDoc(usersCollectionRef, { 이름 : name, 전화번호 : phoneNum, 지역 : local })
+        .then(alert("회원정보가 저장되었습니다!"));
+    };
+
 
     return (
         <Body>
             <Container>
-                <Title>회원가입</Title>
+                <Title>회원정보 추가</Title>
 
                 <Content>
                     <userDetail>
-                        <Span>아이디</Span>
-                        <Input type="text" placeholder="아이디를 입력하세요" />
-                        <Span>비밀번호</Span>
-                        <Input type="password" placeholder="비밀번호를 입력하세요" />
                         <Span>이름</Span>
-                        <Input type="text" placeholder="이름을 입력하세요" />
+                        <Input type="text" placeholder="이름을 입력하세요" onChange={(e) => {setName(e.target.value)}} />
                         <Span>전화번호</Span>
-                        <Input type="text" placeholder="전화번호를 입력하세요" />
-                        <Span>이메일</Span>
-                        <Input type="text" placeholder="이메일을 입력하세요" />
+                        <Input type="text" placeholder="전화번호를 입력하세요" onChange={(e) => {setPhoneNum(e.target.value)} } />
                         <Span>지역</Span>
-                        <Input type="text" placeholder="사는 지역을 입력하세요" />
-                         <Submit>가입하기</Submit>
+                        <Input type="text" placeholder="사는 지역을 입력하세요" onChange={(e) => {setLocal(e.target.value)} } />
+                         <Submit onClick={ createUser }>저장하기</Submit>
                     </userDetail>
                 </Content>
             </Container>
