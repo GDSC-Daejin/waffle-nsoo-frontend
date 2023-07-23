@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
+import { storage } from "../layout/pages/firebase";
 import { useNavigate } from "react-router-dom";
+import Login from "./pages/SignIn";
+import { auth } from "../layout/pages/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const data = [
   {
@@ -144,7 +147,7 @@ const HashTag1 = styled.div`
   width: 65px;
   display: flex;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -153,11 +156,27 @@ const HashTag1 = styled.div`
   font-weight: 600;
 `;
 
+const LoginUser = styled.div`
+  display: flex;
+  position: absolute;
+  left: 5%;
+  bottom: 690px;
+`;
+
+const Btn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 5px;
+`;
+
 const storageRef = getStorage();
 const listRef = ref(storageRef, "images/");
 
 export default function Home() {
   const [imageList, setImageList] = useState([]);
+  const [users, setUsers] = useState(null); // user 상태 추가
   const navigate = useNavigate();
   const [showImages, setShowImages] = useState(true);
 
@@ -175,6 +194,16 @@ export default function Home() {
     };
 
     fetchImageList();
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUsers(user);
+      } else {
+        setUsers(null);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleHome = () => {
@@ -187,9 +216,30 @@ export default function Home() {
     navigate(`/${path}`);
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      setUsers(null);
+    } catch (error) {
+      console.log("Error during logout:", error);
+    }
+  };
+
   return (
     <Main>
       <Header onClick={handleHome}>kbo 매칭⚾︎</Header>
+      {users ? (
+        <LoginUser>
+          <p>로그인된 사용자: {users.displayName}</p>
+          <Btn onClick={handleLogout}>로그아웃</Btn>
+        </LoginUser>
+      ) : (
+        <Login setUser={setUsers} />
+      )}
       <Title>야구장을 선택해주세요</Title>
       <Title>보고 싶은 구장을 선택하세요</Title>
       <Body>

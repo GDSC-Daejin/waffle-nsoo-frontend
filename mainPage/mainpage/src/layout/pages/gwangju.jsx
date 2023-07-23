@@ -33,7 +33,7 @@ const Card = styled.h3`
   padding: 5px;
   p {
     margin: 0;
-    font-size: 15px;
+    font-size: 13px;
     width: 200px;
   }
 `;
@@ -87,7 +87,7 @@ export default function Select() {
         <Box key={uuidv4()}>
           <p>{item.date}</p>
           {item.matches
-            .filter((match) => match.location === "대전 이글스 파크")
+            .filter((match) => match.location === "기아 챔피언스 필드")
             .map((match) => (
               <Card key={uuidv4()}>
                 <input
