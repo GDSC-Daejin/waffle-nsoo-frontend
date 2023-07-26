@@ -176,7 +176,7 @@ const listRef = ref(storageRef, "images/");
 
 export default function Home() {
   const [imageList, setImageList] = useState([]);
-  const [users, setUsers] = useState(null); // user 상태 추가
+  const [users, setUsers] = useState(null);
   const navigate = useNavigate();
   const [showImages, setShowImages] = useState(true);
 

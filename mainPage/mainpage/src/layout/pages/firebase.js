@@ -33,10 +33,10 @@ export async function login() {
 export async function logout(auth) {
   return signOut(auth).then(() => null);
 }
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const database = getDatabase();
 
-// app 객체를 내보내도록 추가
 export { app };

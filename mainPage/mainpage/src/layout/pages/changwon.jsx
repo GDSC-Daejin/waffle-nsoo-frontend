@@ -36,6 +36,17 @@ const Card = styled.h3`
     font-size: 14px;
     width: 210px;
   }
+  @media (max-width: 1000px) {
+    display: flex;
+    width: 90%;
+    height: 20px;
+    p {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      font-size: 10px;
+    }
+  }
 `;
 
 export default function Select() {

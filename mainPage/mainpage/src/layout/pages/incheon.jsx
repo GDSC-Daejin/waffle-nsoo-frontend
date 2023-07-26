@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineHome } from "react-icons/ai";
 import Chat from "./chat";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = styled.div`
   display: flex;
@@ -34,8 +35,24 @@ const Card = styled.h3`
   p {
     margin: 0;
     font-size: 14px;
-    width: 200px;
+    width: 210px;
   }
+  @media (max-width: 1000px) {
+    display: flex;
+    width: 90%;
+    height: 20px;
+    p {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      font-size: 10px;
+    }
+  }
+`;
+
+const Modal = styled.div`
+  width: 200px;
+  height: 200px;
 `;
 
 export default function Select() {
@@ -80,9 +97,7 @@ export default function Select() {
 
   return (
     <>
-      <Header onClick={handleHome}>
-        kbo 매칭⚾︎<AiOutlineHome></AiOutlineHome>
-      </Header>
+      <Header onClick={handleHome}>kbo 매칭⚾︎</Header>
       {game.map((item) => (
         <Box key={uuidv4()}>
           <p>{item.date}</p>

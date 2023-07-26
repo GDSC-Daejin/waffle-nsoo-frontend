@@ -58,7 +58,6 @@ export default function Chat() {
     navigate("/");
   };
 
-  // 사용자 인증 관찰자 설정
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -89,13 +88,11 @@ export default function Chat() {
   }, []);
 
   const handleSubmit = () => {
-    // 인증된 사용자만 채팅 가능하도록 확인
     if (!user) {
       alert("로그인이 필요합니다.");
       return;
     }
 
-    // Firebase의 실시간 데이터베이스에 데이터 추가
     const db = getDatabase();
     const messagesRef = ref(db, "messages");
     push(messagesRef, {
@@ -103,7 +100,6 @@ export default function Chat() {
       user: user.email,
     });
 
-    // 입력 필드 초기화
     setMessageText("");
   };
 
