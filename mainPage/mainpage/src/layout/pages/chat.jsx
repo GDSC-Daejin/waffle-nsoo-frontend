@@ -77,7 +77,6 @@ export default function Chat() {
     const db = getDatabase();
     const messagesRef = ref(db, "messages");
 
-    // 데이터 변경 시마다 호출되는 콜백 함수 등록
     onValue(messagesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {

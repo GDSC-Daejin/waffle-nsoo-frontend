@@ -1,11 +1,11 @@
-import Seoul from "../assets/images/seoul.jpg";
-import Daegu from "../assets/images/samsung.jpg";
-import Gwangju from "../assets/images/kia.jpg";
-import Daejeon from "../assets/images/hanhwa.jpg";
-import Changwon from "../assets/images/nc.jpg";
-import Busan from "../assets/images/lotte.jpg";
-import Suwon from "../assets/images/kt.jpg";
-import Incheon from "../assets/images/ssg.jpg";
+import Seoul from "../images/seoul.jpg";
+import Daegu from "../images/samsung.jpg";
+import Gwangju from "../images/kia.png";
+import Daejeon from "../images/hanhwa.jpg";
+import Changwon from "../images/nc.jpg";
+import Busan from "../images/lotte.jpg";
+import Suwon from "../images/kt.jpg";
+import Incheon from "../images/ssg.jpg";
 
 const cityList = [
   {
@@ -13,7 +13,7 @@ const cityList = [
     id: "123",
     top: "150px",
     left: "110px",
-    backgroundImage: `${Seoul}`,
+    backgroundImage: "Seoul",
   },
   {
     name: "Daegu",
@@ -21,7 +21,7 @@ const cityList = [
     id: "124",
     top: "390px",
     left: "270px",
-    backgroundImage: `${Daegu}`,
+    backgroundImage: "Daegu",
   },
   {
     name: "Gwangju",
@@ -29,7 +29,7 @@ const cityList = [
     id: "125",
     top: "470px",
     left: "110px",
-    backgroundImage: `${Gwangju}`,
+    backgroundImage: "Gwangju",
   },
   {
     name: "Daejeon",
@@ -37,7 +37,7 @@ const cityList = [
     id: "126",
     top: "330px",
     left: "150px",
-    backgroundImage: `${Daejeon}`,
+    backgroundImage: "Daejeon",
   },
   {
     name: "Changwon",
@@ -45,7 +45,7 @@ const cityList = [
     id: "127",
     top: "470px",
     left: "290px",
-    backgroundImage: `${Changwon}`,
+    backgroundImage: "Changwon",
   },
   {
     name: "Busan",
@@ -53,7 +53,7 @@ const cityList = [
     id: "128",
     top: "470px",
     left: "320px",
-    backgroundImage: `${Busan}`,
+    backgroundImage: "Busan",
   },
   {
     name: "Suwon",
@@ -61,7 +61,7 @@ const cityList = [
     id: "129",
     top: "180px",
     left: "120px",
-    backgroundImage: `${Suwon}`,
+    backgroundImage: "Suwon",
   },
   {
     name: "Incheon",
@@ -69,7 +69,7 @@ const cityList = [
     id: "120",
     top: "150px",
     left: "80px",
-    backgroundImage: `${Incheon}`,
+    backgroundImage: "Incheon",
   },
 ];
 

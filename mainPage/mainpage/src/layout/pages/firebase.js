@@ -18,7 +18,6 @@ const firebaseConfig = {
 
 const provider = new GoogleAuthProvider();
 
-// 구글 로그인시 동작하는 함수
 export async function login() {
   return signInWithPopup(auth, provider)
     .then((result) => {
@@ -29,7 +28,6 @@ export async function login() {
     .catch(console.error);
 }
 
-// 로그아웃시 동작하는 함수.
 export async function logout(auth) {
   return signOut(auth).then(() => null);
 }

@@ -216,10 +216,6 @@ export default function Home() {
     navigate(`/${path}`);
   };
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
   const handleLogout = async () => {
     try {
       await auth.signOut();

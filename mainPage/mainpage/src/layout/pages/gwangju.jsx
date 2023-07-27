@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import Chat from "./chat";
+import { toast } from "react-toastify";
 
 const Header = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const Card = styled.h3`
   display: flex;
   align-items: center;
   gap: 120px;
-  width: 60%;
+  width: 66%;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
