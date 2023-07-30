@@ -36,8 +36,6 @@ const ChatBox = styled.div`
   height: 90%;
   font-size: 24px;
   overflow: scroll;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Box = styled.div`
@@ -46,13 +44,26 @@ const Box = styled.div`
   width: 100%;
 `;
 
-const auth = getAuth();
+const MessageWrapper = styled.div`
+  display: flex;
+  justify-content: ${({ isCurrentUser }) =>
+    isCurrentUser ? "flex-start" : "flex-end"};
+  margin: 5px;
+`;
+
+const Message = styled.p`
+  background-color: ${({ isCurrentUser }) =>
+    isCurrentUser ? "#e6e6e6ff" : "#3b3b3bff"};
+  color: ${({ isCurrentUser }) => (isCurrentUser ? "#3b3b3bff" : "#e6e6e6ff")};
+  border-radius: 5px;
+  padding: 5px;
+`;
 
 export default function Chat() {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
-  const [user, setUser] = useState(null); // 인증된 사용자 정보
+  const [user, setUser] = useState(null);
 
   const handleHome = () => {
     navigate("/");
@@ -107,10 +118,15 @@ export default function Chat() {
       <Title onClick={handleHome}>야구 볼사람⚾︎</Title>
       <ChatBox>
         {messages.map((message, index) => (
-          <p key={index}>
-            <strong>{message.user}: </strong>
-            {message.text}
-          </p>
+          <MessageWrapper
+            key={index}
+            isCurrentUser={message.user === user?.email}
+          >
+            <Message isCurrentUser={message.user === user?.email}>
+              <strong>{message.user}: </strong>
+              {message.text}
+            </Message>
+          </MessageWrapper>
         ))}
       </ChatBox>
       <Box>
