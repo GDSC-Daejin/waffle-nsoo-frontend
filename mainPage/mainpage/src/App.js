@@ -15,19 +15,21 @@ import SignUp from "./layout/pages/SignUp";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signUp" element={<SignUp />} />
-      <Route path="/incheon" element={<Incheon />} />
-      <Route path="/changwon" element={<Changwon />} />
-      <Route path="/daejeon" element={<Daejeon />} />
-      <Route path="/gocheock" element={<Gocheock />} />
-      <Route path="/gwangju" element={<Gwangju />} />
-      <Route path="/jamsil" element={<Jamsil />} />
-      <Route path="/suwon" element={<Suwon />} />
-      <Route path="/sajik" element={<Sajik />} />
-      <Route path="/chat" element={<Chat />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/incheon" element={<Incheon />} />
+        <Route path="/changwon" element={<Changwon />} />
+        <Route path="/daejeon" element={<Daejeon />} />
+        <Route path="/gocheock" element={<Gocheock />} />
+        <Route path="/gwangju" element={<Gwangju />} />
+        <Route path="/jamsil" element={<Jamsil />} />
+        <Route path="/suwon" element={<Suwon />} />
+        <Route path="/sajik" element={<Sajik />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
+    </>
   );
 }
