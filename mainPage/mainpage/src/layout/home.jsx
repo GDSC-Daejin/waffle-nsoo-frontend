@@ -229,35 +229,37 @@ export default function Home() {
     <Main>
       <Header onClick={handleHome}>kbo 매칭⚾︎</Header>
       {users ? (
-        <LoginUser>
-          <p>로그인된 사용자: {users.displayName}</p>
-          <Btn onClick={handleLogout}>로그아웃</Btn>
-        </LoginUser>
+        <>
+          <LoginUser>
+            <p>로그인된 사용자: {users.displayName}</p>
+            <Btn onClick={handleLogout}>로그아웃</Btn>
+          </LoginUser>
+          <Title>야구장을 선택해주세요</Title>
+          <Title>보고 싶은 구장을 선택하세요</Title>
+          <Body>
+            {showImages &&
+              imageList.map((url, index) => (
+                <BodyContainer
+                  key={index}
+                  onClick={() => handleClick(data[index].path)}
+                >
+                  <Image>
+                    <img src={url} alt="Image" width={300} height={360} />
+                  </Image>
+                  <Stadium_name>{data[index].name}</Stadium_name>
+                  <Tag>
+                    <HashTag1>{data[index].hashtag}</HashTag1>
+                    <HashTag1>{data[index].meet}</HashTag1>
+                    <HashTag1>{data[index].into}</HashTag1>
+                    <HashTag1>{data[index].into1}</HashTag1>
+                  </Tag>
+                </BodyContainer>
+              ))}
+          </Body>
+        </>
       ) : (
         <Login setUser={setUsers} />
       )}
-      <Title>야구장을 선택해주세요</Title>
-      <Title>보고 싶은 구장을 선택하세요</Title>
-      <Body>
-        {showImages &&
-          imageList.map((url, index) => (
-            <BodyContainer
-              key={index}
-              onClick={() => handleClick(data[index].path)}
-            >
-              <Image>
-                <img src={url} alt="Image" width={300} height={360} />
-              </Image>
-              <Stadium_name>{data[index].name}</Stadium_name>
-              <Tag>
-                <HashTag1>{data[index].hashtag}</HashTag1>
-                <HashTag1>{data[index].meet}</HashTag1>
-                <HashTag1>{data[index].into}</HashTag1>
-                <HashTag1>{data[index].into1}</HashTag1>
-              </Tag>
-            </BodyContainer>
-          ))}
-      </Body>
     </Main>
   );
 }
