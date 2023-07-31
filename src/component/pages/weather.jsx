@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
@@ -70,11 +71,13 @@ export default function Weather() {
     );
   };
 
+
   const currentWeather = data && data[currentCityIndex];
   const backgroundImage = List.map((item) => item.backgroundImage);
 
   return (
     <>
+
       {currentWeather && (
         <WeatherBox
           style={{
@@ -98,6 +101,7 @@ export default function Weather() {
         <Btn onClick={handlePrevious}>{"<"}</Btn>
         <Btn onClick={handleNext}>{">"}</Btn>
       </BtnContainer>
+
     </>
   );
 }
