@@ -11,7 +11,7 @@ function App() {
     <>
 
       <QueryClientProvider client={queryClient}>
-        <Weather></Weather>
+        <Weather />
       </QueryClientProvider>
 
     </>

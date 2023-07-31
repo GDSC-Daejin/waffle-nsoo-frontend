@@ -5,7 +5,6 @@ const cityList = [
     top: "150px",
     left: "110px",
     backgroundImage: "Seoul",
-    // backgroundColor: "#2C65B8",
   },
   {
     name: "Daegu",

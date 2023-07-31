@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import List from "../data/List";
-import { styled } from "styled-components";
+import List from "../assets/data/List";
+import styled from "styled-components";
 
 const WeatherBox = styled.div`
   width: 300px;
