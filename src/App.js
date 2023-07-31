@@ -1,10 +1,19 @@
 import React from "react";
-import Geolocation from "../src/component/location/geolocation";
+
+import Weather from "./component/pages/weather";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
 
 function App() {
   return (
     <>
-      <Geolocation></Geolocation>
+
+      <QueryClientProvider client={queryClient}>
+        <Weather></Weather>
+      </QueryClientProvider>
+
     </>
   );
 }
