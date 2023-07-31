@@ -1,107 +1,127 @@
+import React, { useEffect, useState } from "react";
+import cityList from "../assets/data/List";
+import { styled } from "styled-components";
 
-import React, { useState } from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import List from "../assets/data/List";
-import styled from "styled-components";
+const WeatherContainer = styled.div`
+  display: flex;
+  position: fixed;
+  top: 25%;
+  left: 60%;
+  width: 400px;
+  height: 500px;
+  border: 1px solid;
+  flex-direction: column;
+  background-color: ${(props) => props.backgroundColor};
+  color: white;
+  border-radius: 10%;
+  @media (max-width: 868px) {
+    width: 40%;
+    height: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    position: fixed;
+    left: 60%;
+  }
+`;
+
+const Title = styled.h1`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 10px 17px 10px;
+  font-size: 50px;
+  width: 100%;
+  justify-content: center;
+  border-bottom: 1px solid;
+  @media (max-width: 868px) {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    font-size: 30px;
+  }
+`;
 
 const WeatherBox = styled.div`
-  width: 300px;
-  height: 300px;
-  border: 1px solid;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: ${(props) => `url(${props.backgroundImage})`};
-  background-size: cover;
-  color: white;
-  font-weight: 800;
+  font-size: 1.7rem;
+  @media (max-width: 868px) {
+    font-size: 20px;
+    display: flex;
+  }
 `;
 
-const Title = styled.h1`
-  font-weight: 700;
-  border-bottom: 1px solid;
+const NowWeather = styled.h1`
+  width: 250px;
+  margin-top: 4rem;
+  font-size: 5rem;
+  text-align: center;
 `;
 
-const TodayWeather = styled.div`
-  width: 90px;
+const NowHumi = styled.h2`
+  font-size: 2.5rem;
+  margin-top: 2rem;
 `;
 
-const Btn = styled.button`
-  width: 130px;
+const NowTemper = styled.h1`
+  font-size: 3rem;
+  margin-top: 2.5rem;
 `;
 
-const BtnContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+export default function Weather({ selectedLocation }) {
+  const [weatherData, setWeatherData] = useState([]);
 
-export default function Weather() {
-  const [city, setCity] = useState(List);
-  const [currentCityIndex, setCurrentCityIndex] = useState(0);
-
-  const { isLoading, error, data } = useQuery(["weather"], async () => {
-    const responses = await Promise.all(
-      city.map((citys) =>
-        axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${citys.name}&appid=9143ecd93a4dda0a18e7aaafd4c2676a`
+  useEffect(() => {
+    Promise.all(
+      cityList
+        .filter((city) => city.name === selectedLocation)
+        .map((city) =>
+          fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=eb6ead89e7b4d13d472f4340f40d5529`
+          ).then((res) => res.json())
         )
-      )
-    );
-    return responses.map((response) => response.data);
-  });
+    )
+      .then((data) => setWeatherData(data))
+      .catch((error) => console.log(error));
+  }, [selectedLocation]);
 
-  if (isLoading) return "Loading...";
-  if (error) return "Error: " + error.message;
+  if (weatherData.length === 0) {
+    return <div>Loading...</div>;
+  }
 
-  const handlePrevious = () => {
-    setCurrentCityIndex((prevIndex) =>
-      prevIndex === 0 ? city.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentCityIndex((prevIndex) =>
-      prevIndex === city.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-
-  const currentWeather = data && data[currentCityIndex];
-  const backgroundImage = List.map((item) => item.backgroundImage);
+  const selectedCity = cityList.find((city) => city.name === selectedLocation);
+  const backgroundColor = selectedCity ? selectedCity.backgroundColor : "";
 
   return (
     <>
+      {weatherData.map((data) => {
+        const Temp = data.main.temp;
+        const Today = Temp - 273.15;
+        const Main = data.weather[0].main;
+        const WeatherIcon = data.weather[0].icon;
+        const Key = data.weather[0].id;
+        const Humidity = data.main.humidity;
 
-      {currentWeather && (
-        <WeatherBox
-          style={{
-            backgroundImage: `url(${backgroundImage[currentCityIndex]})`,
-          }}
-        >
-          <Title>{currentWeather.name}</Title>
-          <TodayWeather>
-            오늘의 날씨 :{" "}
-            <img
-              src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`}
-              width={100}
-              alt="Weather Icon"
-            />
-          </TodayWeather>
-          <p>온도: {(currentWeather.main.temp - 273.15).toFixed(1)}°C</p>
-          <p>습도: {currentWeather.main.humidity}%</p>
-        </WeatherBox>
-      )}
-      <BtnContainer>
-        <Btn onClick={handlePrevious}>{"<"}</Btn>
-        <Btn onClick={handleNext}>{">"}</Btn>
-      </BtnContainer>
-
+        return (
+          <WeatherContainer backgroundColor={backgroundColor} key={Key}>
+            <Title>{selectedLocation}</Title>
+            <WeatherBox>
+              <NowWeather>" {Main} "</NowWeather>
+              <img
+                src={`http://openweathermap.org/img/wn/${WeatherIcon}@2x.png`}
+                width={150}
+              />
+              <NowTemper>현재 기온 : {Today.toFixed(1)}°C</NowTemper>
+              <NowHumi>습도: {Humidity}%</NowHumi>
+            </WeatherBox>
+          </WeatherContainer>
+        );
+      })}
     </>
   );
 }

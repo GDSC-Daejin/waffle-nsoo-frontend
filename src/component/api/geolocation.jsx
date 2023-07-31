@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Korea from "../assets/images/korea.png";
 import { styled } from "styled-components";
 import cityList from "../assets/data/List.js";
-import Weather from "../pages/weather";
+import Weather from "../pages/Weather";
 import Weathers from "../assets/images/weather.jpeg";
+import Header from "../Navigation/Header";
+import GlobalStyle from "../styles/Globalstyles";
 
 const All = styled.div`
   height: 100vh;
@@ -12,17 +14,7 @@ const All = styled.div`
   background-size: cover;
 `;
 
-const Title = styled.h1`
-  display: flex;
-  width: 100%;
-  margin: 0;
-  font-size: 2.6rem;
-  border-bottom: 2px solid;
-  background-color: #0b2447;
-  color: white;
-  justify-content: center;
-`;
-
+/* 한국 지도 부분 스타일 */
 const Location = styled.div`
   margin: 0;
   padding: 0;
@@ -30,9 +22,10 @@ const Location = styled.div`
   height: 700px;
   position: fixed;
   left: 25%;
-  top: 10%;
+  top: 20%;
 `;
 
+/* 지역 선택하는 클릭파트 */
 const Seoul = styled.button`
   position: absolute;
   width: 20px;
@@ -40,17 +33,24 @@ const Seoul = styled.button`
   border-radius: 50%;
   top: ${(props) => props.top};
   left: ${(props) => props.left};
+  &: hover {
+    background-color: #576CBC;
+    transition: 0.3s;
+  }
 `;
 
+/* 지역명 표시 툴팁 */
 const LocationInfo = styled.div`
   position: absolute;
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   background-color: white;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
   font-weight: bold;
   font-size: 10px;
+  text-align: center;
   border-radius: 50%;
+  height: 23px;
 `;
 
 export default function Geolocation() {
@@ -61,25 +61,28 @@ export default function Geolocation() {
   };
 
   return (
-    <All>
-      <Title>야구장 날씨</Title>
-      <Location>
-        <img src={Korea} width={400} alt="Korea" />
-        {cityList.map((item) => (
-          <Seoul
-            key={item.id}
-            top={item.top}
-            left={item.left}
-            onClick={() => handleChange(item.name, item.top, item.left)}
-          ></Seoul>
-        ))}
-        {selectedLocation && (
-          <LocationInfo top={selectedLocation.top} left={selectedLocation.left}>
-            {selectedLocation.name}
-            <Weather selectedLocation={selectedLocation.name} />
-          </LocationInfo>
-        )}
-      </Location>
-    </All>
+    <>
+      <All>
+        <GlobalStyle />
+      <Header />
+        <Location>
+          <img src={Korea} width={400} alt="Korea" />
+          {cityList.map((item) => (
+            <Seoul
+              key={item.id}
+              top={item.top}
+              left={item.left}
+              onClick={() => handleChange(item.name, item.top, item.left)}
+            ></Seoul>
+          ))}
+          {selectedLocation && (
+            <LocationInfo top={selectedLocation.top} left={selectedLocation.left}>
+              {selectedLocation.name}
+              <Weather selectedLocation={selectedLocation.name} />
+            </LocationInfo>
+          )}
+        </Location>
+      </All>
+    </>
   );
 }
